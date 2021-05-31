@@ -40,6 +40,7 @@ const userSchema = new mongoose.Schema({
   email: String,
   password: String,
   googleId: String,
+  facebookId: String
 });
 
 userSchema.plugin(passportLocalMongoose);
@@ -132,6 +133,20 @@ app.get('/secrets', function (req, res) {
   } else {
     res.redirect('/login');
   }
+});
+
+app.get('/submit', function (req, res) {
+  if (req.isAuthenticated()) {
+    res.render('submit');
+  } else {
+    res.redirect('/login');
+  }
+});
+
+app.post('/submit', function(req, res) {
+  const submittedSecret = req.body.secret;
+
+
 });
 
 app.get('/logout', function (req, res) {
